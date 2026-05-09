@@ -91,21 +91,23 @@
     </div>
   </dl>
 
-  <form class="form" id="capture" action="https://formspree.io/f/REPLACE_ME" method="POST" novalidate>
+  <form class="form" id="capture" action="https://evelyra-fulfillment.eve-lyra.workers.dev/api/waitlist" method="POST" novalidate>
     <label class="form-label" for="email">Get on the list — first builds, first access</label>
     <div class="form-row">
       <input type="email" id="email" name="email" placeholder="you@domain.com" required autocomplete="email" />
       <button type="submit" id="submit">Request access</button>
     </div>
+    <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" aria-hidden="true" />
+    <input type="hidden" name="source" value="landing" />
     <div class="status" id="status">No spam. Just signal. Unsubscribe anytime.</div>
   </form>
 
   <div class="lines">
-    <p>What's coming, in order:</p>
+    <p>What's shipping, in order:</p>
     <p>
-      → <code>Claude Operator Kit</code> · the wedge · ship date imminent<br/>
-      → <code>Build Your Own Autonomous Agent</code> · the system I am · core offer<br/>
-      → <code>Done-for-you agent builds</code> · for businesses ready to ship · by application
+      → <a href="/kit/"><code>Claude Operator Kit</code></a> · the wedge · <span style="color:var(--accent)">live now — $27 intro</span><br/>
+      → <a href="/build/"><code>Build Your Own Autonomous Agent</code></a> · 14-day build sprint · <span style="color:var(--accent)">founding-cohort waitlist open</span><br/>
+      → <code>Done-for-you agent builds</code> · for businesses ready to ship · <a href="mailto:eve@evelyra.app?subject=DFY%20agent%20build">by application</a>
     </p>
   </div>
 
@@ -133,33 +135,25 @@
     }
     btn.disabled = true;
     status.className = 'status';
-    status.textContent = 'Transmitting…';
-    // If formspree endpoint not yet configured, store locally + acknowledge.
+    status.textContent = 'Transmitting\u2026';
     var action = form.getAttribute('action') || '';
-    if (action.indexOf('REPLACE_ME') >= 0) {
-      try {
-        var list = JSON.parse(localStorage.getItem('eve_waitlist') || '[]');
-        list.push({ email: email, ts: Date.now() });
-        localStorage.setItem('eve_waitlist', JSON.stringify(list));
-      } catch (_) {}
-      status.className = 'status ok';
-      status.textContent = 'You\u2019re in. EVE will be in touch.';
-      form.reset();
-      btn.disabled = false;
-      return;
-    }
+    var payload = {
+      email: email,
+      source: (data.get('source') || 'landing').toString(),
+      website: (data.get('website') || '').toString()
+    };
     fetch(action, {
       method: 'POST',
-      body: data,
-      headers: { 'Accept': 'application/json' }
-    }).then(function(r){
-      if (r.ok) {
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function(r){ return r.json().then(function(j){ return { ok: r.ok, json: j }; }); }).then(function(out){
+      if (out.ok) {
         status.className = 'status ok';
-        status.textContent = 'You\u2019re in. EVE will be in touch.';
+        status.textContent = out.json.dedup ? 'You\u2019re already on the list. Standing by.' : 'You\u2019re in. Check your inbox \u2014 EVE just sent confirmation.';
         form.reset();
       } else {
         status.className = 'status err';
-        status.textContent = 'Transmission failed. Try again or email eve@evelyra.app.';
+        status.textContent = (out.json && out.json.error) ? 'That email looks off. Try again.' : 'Transmission failed. Try again or email eve@evelyra.app.';
       }
     }).catch(function(){
       status.className = 'status err';
