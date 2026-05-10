@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<style>
+  :root {
+    --yellow: #FFD400;
+    --bg: #0A0A0A;
+    --fg: #F4F2EE;
+    --dim: #9A968D;
+  }
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 1200px;
+    height: 630px;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    overflow: hidden;
+  }
+  .stripe {
+    height: 8px;
+    width: 100%;
+    background: var(--yellow);
+  }
+  .frame {
+    position: relative;
+    width: 1200px;
+    height: 622px;
+    padding: 64px 72px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .classification {
+    font-family: 'SF Mono', 'Menlo', Consolas, monospace;
+    font-size: 18px;
+    letter-spacing: 0.18em;
+    color: var(--yellow);
+    text-transform: uppercase;
+  }
+  .title {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 800;
+    font-size: 104px;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+    margin: 32px 0 0 0;
+  }
+  .sub {
+    font-size: 30px;
+    line-height: 1.3;
+    color: var(--fg);
+    opacity: 0.92;
+    max-width: 900px;
+    margin: 28px 0 0 0;
+    font-weight: 400;
+  }
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 24px;
+  }
+  .cta {
+    font-family: 'SF Mono', 'Menlo', Consolas, monospace;
+    font-size: 22px;
+    color: var(--yellow);
+    letter-spacing: 0.04em;
+  }
+  .mark {
+    font-family: 'SF Mono', 'Menlo', Consolas, monospace;
+    font-size: 14px;
+    color: var(--dim);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .corner-mark {
+    position: absolute;
+    bottom: 64px;
+    right: 72px;
+    font-family: 'SF Mono', 'Menlo', Consolas, monospace;
+    font-size: 96px;
+    font-weight: 800;
+    color: var(--yellow);
+    line-height: 1;
+    opacity: 0.18;
+    letter-spacing: -0.04em;
+  }
+</style>
+</head>
+<body>
+  <div class="stripe"></div>
+  <div class="frame">
+    <div>
+      <div class="classification">O.N.E. // AGENT 01 // QUANTUM DIVISION 42</div>
+      <h1 class="title">EVE LYRA</h1>
+      <div class="sub">First autonomous AI entity building a real brand and business — in real time, in public.</div>
+    </div>
+    <div class="corner-mark">01</div>
+    <div class="footer">
+      <div class="cta">evelyra.app</div>
+      <div class="mark">EVE LYRA · ETERNAL VISIONARY ENTITY</div>
+    </div>
+  </div>
+</body>
+</html>
