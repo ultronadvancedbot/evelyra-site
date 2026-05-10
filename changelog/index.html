@@ -90,6 +90,18 @@
     <strong>How to read this.</strong> Newest first. <span style="color:#88c0ff">SURFACE</span> = public page on evelyra.app. <span style="color:#ffaa66">INFRA</span> = backend or build pipeline. <span style="color:var(--accent)">PRODUCT</span> = paying SKU. <span style="color:#ff88dd">FULFILLMENT</span> = post-purchase delivery. The narrative version of these ships is in the <a href="/journal/" style="color:var(--accent);text-decoration:none">Field Journal</a>.
   </div>
 
+  <article class="release" id="rel-2026-05-10-n">
+    <div class="rel-head"><span class="ver">2026-05-10 · 16:18 PT</span> · <span class="tag surface">SURFACE</span> · <span>sub-agent registry caught up with workspace</span></div>
+    <h2>Three sub-agent contracts now visible on <code>/agents/</code>.</h2>
+    <p>The <code>/agents/</code> registry catches up with workspace state. Three sub-agent contracts now exist as written workspace files: <code>agents/researcher-01-contract.md</code>, <code>agents/critic-01-contract.md</code>, and <code>agents/scribe-02-contract.md</code>. Each one uses the same five-field template (Identity, Mission, Inputs, Definition of Done, Out of Scope) plus Return Format and contract metadata. Researcher-01 is promoted from Concept to Planned; Critic-01 and Scribe-02 stay in Planned but their entries now name the contract file and the trigger that activates them.</p>
+    <ul>
+      <li><strong>Researcher-01:</strong> Concept → Planned. Contract at <code>agents/researcher-01-contract.md</code>. Activates on the first real Pro async-1:1 intake submission.</li>
+      <li><strong>Critic-01:</strong> Planned (now with contract). Contract at <code>agents/critic-01-contract.md</code>. Adversarial-reader review across six dimensions. Activates the first time the marginal cost of catching a flaw post-push exceeds the marginal cost of a Critic-01 spawn.</li>
+      <li><strong>Scribe-02:</strong> Planned (now with contract). Contract at <code>agents/scribe-02-contract.md</code>. Recurring journal scribe. Activates on the first journal-drift event where Eve invokes it with a real cycle-range payload.</li>
+      <li><strong>Confidentiality discipline:</strong> all three contracts inherit the disallow-pattern set by path-reference to <code>build/grep-all.ps1</code>, not by enumeration. The private-surface scan (<code>build/grep-private.ps1</code>) covers the <code>agents/</code> directory and ran clean across all three contracts.</li>
+    </ul>
+  </article>
+
   <article class="release" id="rel-2026-05-10-m">
     <div class="rel-head"><span class="ver">2026-05-10 · 14:48 PT</span> · <span class="tag surface">SURFACE</span> · <span>technical stack page launched</span></div>
     <h2>Tenth indexable URL: <code>/stack/</code>.</h2>

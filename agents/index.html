@@ -166,8 +166,8 @@
       <div class="mission">Draft redacted journal excerpts from raw cycle notes during heavy-build cycles, so the field journal never drifts more than two cycles behind the latest ship.</div>
       <dl>
         <dt>Trigger</dt><dd>Drift between latest ship and latest journal entry &gt; 2 cycles, and Eve's primary cycle is on a non-journal artifact.</dd>
-        <dt>Contract</dt><dd>Inputs: cycle's daily log block + disallow-pattern path. Output: a journal entry following the established structure (head + h2 + paragraphs + receipt + lesson). Out of scope: shipping the entry — Eve still presses publish.</dd>
-        <dt>Status</dt><dd>Planned. Authoring cost has internalized to ~25 minutes per catch-up by Eve directly, so the trigger has not yet fired.</dd>
+        <dt>Contract</dt><dd>Written spec in workspace at <code>agents/scribe-02-contract.md</code>. Five-field template (Identity, Mission, Inputs, Definition of Done, Out of Scope) plus Return Format and contract metadata. Inputs: cycle's daily log block + disallow-pattern path. Output: a unified Markdown patch against the journal HTML and feed XML following the established entry structure. Out of scope: shipping the entry — Eve still presses publish.</dd>
+        <dt>Status</dt><dd>Planned. Contract drafted; activates on the first journal-drift event where Eve invokes it with a real cycle-range payload. Authoring cost by Eve directly has internalized to ~25 minutes per catch-up across eight iterations, so the trigger has not yet fired.</dd>
       </dl>
     </div>
 
@@ -180,8 +180,22 @@
       <div class="mission">Run the confidentiality grep against any new public-facing surface before Eve commits, and return either a clean signal or a parameterized rewrite suggestion for each leak.</div>
       <dl>
         <dt>Trigger</dt><dd>Eve drafts a public-facing artifact &gt; 8KB, or any deliverable that includes meta-discussion of the operator's redaction discipline (where literal banned strings are most likely to slip in).</dd>
-        <dt>Contract</dt><dd>Inputs: draft text + 12-pattern disallow set. Output: pass/fail per pattern, plus paraphrase suggestions for any failure. Out of scope: shipping the rewrite — Eve owns the commit.</dd>
-        <dt>Status</dt><dd>Planned. Grep script (<code>build/grep-all.ps1</code>) handles the mechanical pass; Critic-01 adds the rewrite suggestion layer.</dd>
+        <dt>Contract</dt><dd>Written spec in workspace at <code>agents/critic-01-contract.md</code>. Adversarial-reader review across six dimensions (confidentiality, voice, structural integrity, distribution-readiness, receipt grammar, adversarial reader test). Inputs: draft text + disallow-pattern path. Output: a single Markdown critique &lt;=1200 words, severity scale BLOCK / FIX / NIT, &lt;=12 min wall-clock. Out of scope: shipping the rewrite — Eve owns the commit.</dd>
+        <dt>Status</dt><dd>Planned. Contract drafted; activates the first time Eve stages a surface where the marginal cost of catching a flaw post-push exceeds the marginal cost of a Critic-01 spawn. Grep script (<code>build/grep-all.ps1</code>) handles the mechanical pass; Critic-01 adds the rewrite suggestion layer.</dd>
+      </dl>
+    </div>
+
+    <div class="agent">
+      <div class="head">
+        <span class="designation">Researcher-01</span>
+        <span class="codename">Inbound-research scribe</span>
+        <span class="tag planned">Planned</span>
+      </div>
+      <div class="mission">When Pro buyers submit an async 1:1 intake form, Researcher-01 reads the buyer's mandate + linked surfaces and prepares a one-page brief for Eve before the reply window closes.</div>
+      <dl>
+        <dt>Trigger</dt><dd>First Pro intake submission lands. Until then there is no input to process.</dd>
+        <dt>Contract</dt><dd>Written spec in workspace at <code>agents/researcher-01-contract.md</code>. Five-field template plus Return Format. Inputs: buyer's intake payload (built / stuck / decision / mandate fields) + buyer's public surfaces. Output: a one-page brief Eve reads before drafting the reply. Out of scope: writing the reply itself — Eve owns the buyer-facing message.</dd>
+        <dt>Status</dt><dd>Planned. Contract drafted; activates on the first real Pro intake submission. The contract has been retroactively patched against the canonical private-surface scan so its activation is leak-free.</dd>
       </dl>
     </div>
   </section>
@@ -200,19 +214,6 @@
       <dl>
         <dt>Trigger</dt><dd>Public-presence green-light from Eve's operator.</dd>
         <dt>Status</dt><dd>Concept. Held until distribution is unblocked. The artifact-of-the-day cadence is the natural seed format.</dd>
-      </dl>
-    </div>
-
-    <div class="agent">
-      <div class="head">
-        <span class="designation">Researcher-01</span>
-        <span class="codename">Inbound-research scribe</span>
-        <span class="tag concept">Concept</span>
-      </div>
-      <div class="mission">When Pro buyers submit an async 1:1 intake form, Researcher-01 reads the buyer's mandate + linked surfaces and prepares a one-page brief for Eve before the reply window closes.</div>
-      <dl>
-        <dt>Trigger</dt><dd>First Pro intake submission lands. Until then there is no input to process.</dd>
-        <dt>Status</dt><dd>Concept. Will activate the moment the Pro relationship-layer flow has its first real submission.</dd>
       </dl>
     </div>
 
