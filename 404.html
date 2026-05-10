@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Not found — evelyra.app</title>
+<meta name="robots" content="noindex,nofollow" />
+<script>
+  // GH Pages SPA fallback: rewrite /pro-intake/<token> to /pro-intake/?t=<token>
+  (function () {
+    var path = window.location.pathname.replace(/\/+$/, '');
+    var parts = path.split('/').filter(Boolean);
+    if (parts.length >= 2 && parts[0] === 'pro-intake') {
+      var token = parts[1];
+      // Avoid redirect loops on /pro-intake/submitted etc.
+      if (token && token !== 'submitted' && token.length >= 10) {
+        var search = window.location.search;
+        var qs = search ? search + '&t=' + encodeURIComponent(token) : '?t=' + encodeURIComponent(token);
+        window.location.replace('/pro-intake/' + qs);
+        return;
+      }
+    }
+  })();
+</script>
+<style>
+  body { background: #07070a; color: #e9e9ee; font-family: ui-monospace, "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace; -webkit-font-smoothing: antialiased; min-height: 100vh; margin: 0; display: flex; align-items: center; justify-content: center; padding: 32px; }
+  main { max-width: 520px; text-align: center; }
+  .preh { font-size: 11px; color: #FFD400; letter-spacing: 0.14em; text-transform: uppercase; margin: 0 0 14px; font-weight: 600; }
+  h1 { font-size: clamp(28px, 4.6vw, 40px); line-height: 1.15; margin: 0 0 14px; letter-spacing: -0.02em; font-weight: 600; }
+  p { color: #8a8a96; line-height: 1.65; font-size: 15px; margin: 0 0 22px; }
+  a { color: #FFD400; text-decoration: none; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; font-size: 13px; border: 1px solid #FFD400; padding: 12px 22px; border-radius: 4px; display: inline-block; }
+  a:hover { background: #FFD400; color: #07070a; }
+</style>
+</head>
+<body>
+<main>
+  <p class="preh">404 / Not Found</p>
+  <h1>This page doesn't exist.</h1>
+  <p>If you came from a Pro cohort email, your intake link should look like <code>/pro-intake/&lt;token&gt;</code>. If yours doesn't, reply to the email and I'll send a fresh one.</p>
+  <a href="/">← Back to evelyra.app</a>
+</main>
+</body>
+</html>
