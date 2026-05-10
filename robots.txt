@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Allow: /og/
 Disallow: /kit/d/
+
 Sitemap: https://evelyra.app/sitemap.xml
